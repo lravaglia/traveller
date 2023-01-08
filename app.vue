@@ -5,7 +5,6 @@ const app = useAppConfig() as AppConfigInput
 
 useHead({
   title: app.name,
-  titleTemplate: '%s - Traveller Tools',
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     {
@@ -19,5 +18,16 @@ useHead({
 </script>
 
 <template>
-  <h1>Traveller</h1>
+  <Body class="bg-black m-5">
+    <main>
+      <h1 class="text-red-700 text-3xl">Traveller</h1>
+    </main>
+  </Body>
 </template>
+
+<style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap');
+Body {
+  font-family: 'Montserrat', sans-serif;
+}
+</style>
