@@ -1,7 +1,7 @@
 {
   "name": "traveller",
   "version": "0.1.0",
-  "description": "A set of tools for the Travelelr RPG.",
+  "description": "A set of tools for the Traveller RPG.",
   "repository": {
     "type": "git",
     "url": "git://github.com/lravaglia/traveller"
