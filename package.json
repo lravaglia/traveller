@@ -6,6 +6,7 @@
     "type": "git",
     "url": "git://github.com/lravaglia/traveller"
   },
+  "homepage": "https://github.com/lravaglia/traveller",
   "author": "Lorenzo Ravaglia <lorenzo.ravaglia@hope.edu> (lorenzo.ravaglia.xyz)",
   "license": "AGPL-3.0-or-later",
   "scripts": {
