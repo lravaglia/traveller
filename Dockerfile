@@ -1,13 +1,13 @@
-from node:alpine
+FROM node:alpine
 
-workdir /app
-copy . .
+WORKDIR /app
+COPY . .
 
-run [ "corepack", "enable" ]
-run [ "corepack", "prepare", "pnpm@latest", "--activate" ]
+RUN [ "corepack", "enable" ]
+RUN [ "corepack", "prepare", "pnpm@latest", "--activate" ]
 
-run [ "pnpm", "install" ]
-run [ "pnpm", "build" ]
+RUN [ "pnpm", "install" ]
+RUN [ "pnpm", "build" ]
 
-entrypoint [ "node" ]
-cmd [ "/app/.output/server/index.mjs" ]
+ENTRYPOINT [ "node" ]
+CMD [ "/app/.output/server/index.mjs" ]
