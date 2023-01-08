@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Detect package manager
+      - name: Setup PNPM
         id: setup-pnpm
         run: |
           corepack enable
@@ -41,7 +41,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16"
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
+          cache: ${{ steps.setup-pnpm.outputs.manager }}
       - name: Setup Pages
         uses: actions/configure-pages@v2
         with:
@@ -60,9 +60,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nuxt-build-
       - name: Install dependencies
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+        run: ${{ steps.setup-pnpm.outputs.manager }} ${{ steps.setup-pnpm.outputs.command }}
       - name: Static HTML export with Nuxt
-        run: ${{ steps.detect-package-manager.outputs.manager }} run generate
+        run: ${{ steps.setup-pnpm.outputs.manager }} generate
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
