@@ -1,4 +1,4 @@
-# Nuxt 3 Awesome Starter
+# Traveller Tools
 a Nuxt 3 starter template or boilerplate with a lot of useful features. and integrated with TailwindCSS 3.  
 
 _This template was built to make it easier to create web projects using Nuxt 3. It was originally designed for coursework and portfolio templates. (hence there will be lots of ui components for easy reuse)_
@@ -35,35 +35,35 @@ _This template was built to make it easier to create web projects using Nuxt 3. 
 <table align="center">
   <tr>
     <td align="center" width="100%" colspan="2">
-      <img src="https://github.com/viandwi24/nuxt3-awesome-starter/blob/main/assets/images/preview_new.png?raw=true" alt="Preview" title="Preview">
+      <img src="https://github.com/lravaglia/traveller/blob/main/assets/images/preview_new.png?raw=true" alt="Preview" title="Preview">
     </td>
   </tr>
   <tr>
     <td align="center" width="75%">
-      <img src="https://github.com/viandwi24/nuxt3-awesome-starter/blob/main/assets/images/preview.gif?raw=true" alt="Preview" title="Preview">
+      <img src="https://github.com/lravaglia/traveller/blob/main/assets/images/preview.gif?raw=true" alt="Preview" title="Preview">
     </td>
     <td align="center" width="25%">
-      <img src="https://github.com/viandwi24/nuxt3-awesome-starter/blob/main/assets/images/preview_mobile.gif?raw=true" alt="Preview" title="Preview">
+      <img src="https://github.com/lravaglia/traveller/blob/main/assets/images/preview_mobile.gif?raw=true" alt="Preview" title="Preview">
     </td>
   </tr>
 </table>
 <p align="center">
   <br>
-  <a href="https://nuxt3-awesome-starter.vercel.app/" target="_blank">
+  <a href="https://traveller.vercel.app/" target="_blank">
     Live Demo
   </a>
   <br><br>
-  <a href="https://codesandbox.io/s/github/viandwi24/nuxt3-awesome-starter" title="Open In Code Sandbox">
+  <a href="https://codesandbox.io/s/github/lravaglia/traveller" title="Open In Code Sandbox">
     <img src="https://img.shields.io/badge/Open%20in-CodeSandbox-blue?style=flat-square&logo=codesandboxg" alt="Open In Code Sandbox">
   </a>
   <br>
-  <a href="https://stackblitz.com/github/viandwi24/nuxt3-awesome-starter" title="Open In Stackblitz">
+  <a href="https://stackblitz.com/github/lravaglia/traveller" title="Open In Stackblitz">
     <img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg" alt="Open In Stackblitz">
   </a>
 </p>
 
 ## Table of Contents
-- [Nuxt 3 Awesome Starter](#nuxt-3-awesome-starter)
+- [Traveller Tools](#nuxt-3-awesome-starter)
   - [Features](#features)
   - [To Do](#to-do)
   - [Preview](#preview)
@@ -84,10 +84,10 @@ _This template was built to make it easier to create web projects using Nuxt 3. 
   - [License](#license)
 
 ## Quick Start
-For detail information, go here [Getting Started](https://nuxt3-awesome-starter.vercel.app/getting-started)
+For detail information, go here [Getting Started](https://traveller.vercel.app/getting-started)
 ### Start with this template
 * This project using `pnpm` as package manager.
-* Clone this project to your computer `git clone https://github.com/viandwi24/nuxt3-awesome-starter`
+* Clone this project to your computer `git clone https://github.com/lravaglia/traveller`
 * Install dependencies `pnpm install --shamefully-hoist`
 * Run `pnpm dev` to start development server and open `http://localhost:3000` in your browser
 ### Deploy as Static Site
