@@ -1,12 +1,12 @@
 {
   "name": "traveller",
   "version": "0.1.0",
-  "description": "a Nuxt 3 starter template or boilerplate with a lot of useful features. Nuxt3 + Tailwindcss 3",
+  "description": "A set of tools for the Travelelr RPG.",
   "repository": {
     "type": "git",
     "url": "git://github.com/lravaglia/traveller"
   },
-  "author": "lravaglia",
+  "author": "Lorenzo Ravaglia <lorenzo.ravaglia@hope.edu> (lorenzo.ravaglia.xyz)",
   "license": "AGPL-3.0-or-later",
   "scripts": {
     "build": "nuxt build",
