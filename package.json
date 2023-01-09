@@ -61,5 +61,8 @@
     "**/*.{js,ts,vue,html}": [
       "pnpm lintfix"
     ]
+  },
+  "dependencies": {
+    "supabase": "^1.29.3"
   }
 }

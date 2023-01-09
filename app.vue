@@ -5,7 +5,6 @@ const app = useAppConfig() as AppConfigInput
 
 useHead({
   title: app.name,
-  titleTemplate: '%s - Traveller Tools',
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     {
@@ -19,5 +18,7 @@ useHead({
 </script>
 
 <template>
-  <h1>Traveller</h1>
+  <Body class="bg-black m-5">
+    <h1 class="text-red-700 text-3xl">Traveller</h1>
+  </Body>
 </template>
