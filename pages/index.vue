@@ -2,7 +2,10 @@
 
 <template>
   <main>
-    <h1 class="text-red-700 text-3xl">Traveller</h1>
+    <p>
+      Welcome to Traveller Tools! This is a work in progress website which will
+      provide various tools for running the Traveller RPG.
+    </p>
   </main>
 </template>
 
