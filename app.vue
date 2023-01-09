@@ -19,6 +19,15 @@ useHead({
 
 <template>
   <Body class="bg-black m-5">
-    <h1 class="text-red-700 text-3xl">Traveller</h1>
+    <main>
+      <h1 class="text-red-700 text-3xl">Traveller</h1>
+    </main>
   </Body>
 </template>
+
+<style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap');
+Body {
+  font-family: 'Montserrat', sans-serif;
+}
+</style>
