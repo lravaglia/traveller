@@ -18,11 +18,9 @@ useHead({
 </script>
 
 <template>
-  <Body class="bg-black m-5">
-    <main>
-      <h1 class="text-red-700 text-3xl">Traveller</h1>
-    </main>
-  </Body>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
 <style lang="scss" scoped>
