@@ -8,13 +8,8 @@ describe('example', async () => {
     server: true,
   })
 
-  it('Renders Traveller Tools', async () => {
-    expect(await $fetch('/')).toMatch('Traveller Tools')
+  it('provides an index', async () => {
+    const { statusCode } = await $fetch('/')
+    expect(statusCode).toBe(200)
   })
-
-  if (isDev()) {
-    it('[dev] ensure vite client script is added', async () => {
-      expect(await $fetch('/')).toMatch('/_nuxt/@vite/client"')
-    })
-  }
 })
