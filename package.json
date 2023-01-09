@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "traveller",
   "version": "0.1.0",
   "description": "A set of tools for the Traveller RPG.",
