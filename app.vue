@@ -18,16 +18,20 @@ useHead({
 </script>
 
 <template>
-  <Body class="bg-black m-5">
-    <main>
-      <h1 class="text-red-700 text-3xl">Traveller</h1>
-    </main>
-  </Body>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap');
+
 Body {
   font-family: 'Montserrat', sans-serif;
+  color: whitesmoke;
+}
+
+main {
+  margin-top: 2rem;
 }
 </style>
