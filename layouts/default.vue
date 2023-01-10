@@ -7,16 +7,8 @@
         id="inner-header"
         class="flex flex-row content-center space-x-16"
       >
-        <article class="flex content-center justify-center">
-          <NuxtLink to="/">
-            <h1 class="text-red-600 text-3xl">Traveller Tools</h1>
-          </NuxtLink>
-        </article>
-        <article class="flex content-center justify-center flex-col">
-          <NuxtLink to="/about">
-            <h1 class="text-red-600 text-xl">About</h1>
-          </NuxtLink>
-        </article>
+        <Hero />
+        <HeadItem link="/about" name="About" />
       </section>
     </header>
     <div id="layout-center">
