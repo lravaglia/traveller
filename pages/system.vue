@@ -52,7 +52,7 @@ updateSystem()
           </option>
         </select>
         <button
-          type="submit"
+          type="button"
           class="border-red-600 border-2 p-2 bg-black rounded"
           @click="updateSystem"
         >
