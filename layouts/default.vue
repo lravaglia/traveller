@@ -3,9 +3,21 @@
 <template>
   <Body class="bg-black">
     <header class="border-red-600 border-b-2">
-      <div id="inner-header" class="flex flex-row">
-        <h1 class="text-red-600 text-3xl">Traveller Tools</h1>
-      </div>
+      <section
+        id="inner-header"
+        class="flex flex-row content-center space-x-16"
+      >
+        <article class="flex content-center justify-center">
+          <NuxtLink to="/">
+            <h1 class="text-red-600 text-3xl">Traveller Tools</h1>
+          </NuxtLink>
+        </article>
+        <article class="flex content-center justify-center flex-col">
+          <NuxtLink to="/about">
+            <h1 class="text-red-600 text-xl">About</h1>
+          </NuxtLink>
+        </article>
+      </section>
     </header>
     <div id="layout-center">
       <slot />
