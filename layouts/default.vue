@@ -9,6 +9,7 @@
       >
         <Hero />
         <HeadItem link="/about" name="About" />
+        <HeadItem link="/system" name="System" />
       </section>
     </header>
     <div id="layout-center">
