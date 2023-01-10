@@ -31,6 +31,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@vueuse/nuxt',
     'nuxt-windicss',
+    '@nuxtjs/supabase',
   ],
 
   // vite plugins

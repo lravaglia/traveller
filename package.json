@@ -35,6 +35,7 @@
     "@nuxt/test-utils-edge": "3.0.0-rc.13-27772354.a0a59e2",
     "@nuxtjs/eslint-config": "^12.0.0",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
+    "@nuxtjs/supabase": "^0.3.0",
     "@pinia/nuxt": "^0.4.6",
     "@vueuse/core": "^9.10.0",
     "@vueuse/nuxt": "^9.10.0",
@@ -61,8 +62,5 @@
     "**/*.{js,ts,vue,html}": [
       "pnpm lintfix"
     ]
-  },
-  "dependencies": {
-    "supabase": "^1.29.3"
   }
 }
