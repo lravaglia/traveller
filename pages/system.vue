@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 const supabase = useSupabaseClient()
-const systems = [{ name: 'Regina' }] as const
-const selectedSystem = 'Regina'
+const systems = [{ name: 'Regina' }]
+
+let selectedSystem = 'Regina'
 const systemModel = {
   name: selectedSystem,
   stars: [],
@@ -12,6 +13,7 @@ interface System {
   name: string
   id: string
 }
+
 const updateSystem = async () => {
   const response = await supabase
     .from('systems')
@@ -19,11 +21,10 @@ const updateSystem = async () => {
     .eq('name', selectedSystem)
     .single()
 
-  if (response.error) {
-    console.error(response.error)
-  }
+  if (response.error) return
 
   const system: System = response.data!
+  selectedSystem = system.name
   systemModel.name = system.name
 }
 updateSystem()
