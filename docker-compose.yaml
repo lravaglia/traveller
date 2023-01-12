@@ -1,0 +1,6 @@
+version: "3.9"
+services:
+  traveller:
+    image: ghcr.io/lravaglia/traveller/production:latest
+    ports:
+      - "3000:3000"
