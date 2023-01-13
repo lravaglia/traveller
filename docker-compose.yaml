@@ -10,8 +10,8 @@ services:
   watchtower:
     image: containrrr/watchtower
     environment:
-      - WATCHTOWER_NOTIFICATIONS=1
-      - WATCHTOWER_NOTIFICATION_EMAIL=lorenzo.ravaglia@hope.edu
-      - WATCHTOWER_NOTIFICATION_SLACK_WEBHOOK=https://hooks.slack.com/services/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
+      WATCHTOWER_NOTIFICATIONS: 1
+      WATCHTOWER_NOTIFICATION_EMAIL: lorenzo.ravaglia@hope.edu
+      WATCHTOWER_NOTIFICATION_SLACK_WEBHOOK: ${SLACK_WEBHOOK}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
