@@ -4,12 +4,18 @@ interface System {
   id: string
 }
 
+interface Model {
+  name: string
+  stars: string[]
+  worlds: string[]
+}
+
 const supabase = useSupabaseClient()
-const response = await supabase.from('systems').select('*')
+const response = await supabase.from('systems').select('name, id')
 const systems: System[] = response.data!
 
 let selectedSystem = 'Regina'
-const systemModel = {
+const systemModel: Model = {
   name: selectedSystem,
   stars: [],
   worlds: [],
@@ -18,15 +24,21 @@ const systemModel = {
 const updateSystem = async () => {
   const response = await supabase
     .from('systems')
-    .select('*')
+    .select('name, id')
     .eq('name', selectedSystem)
     .single()
 
   if (response.error) return
 
-  const system: System = response.data!
-  selectedSystem = system.name
-  systemModel.name = system.name
+  const data = response.data!
+  const model: Model = {
+    name: data.name,
+    stars: [],
+    worlds: [],
+  }
+
+  selectedSystem = model.name
+  Object.assign(systemModel, model)
 }
 updateSystem()
 </script>
