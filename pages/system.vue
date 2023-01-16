@@ -1,12 +1,16 @@
 <script lang="ts" setup>
-type StarColor = 'O' | 'B' | 'A' | 'F' | 'G' | 'K' | 'M'
+type StarType = 'O' | 'B' | 'A' | 'F' | 'G' | 'K' | 'M'
 type SpectralType = 'Ia' | 'Ib' | 'II' | 'III' | 'IV' | 'V' | 'VI' | 'D'
 
-interface Star {
-  spectral: SpectralType
-  color: StarColor
-  decimals: number
+type Detail<A extends {}, B extends {}> = {
+  less: A
+  more?: B
 }
+
+type Star = Detail<
+  { type: StarType },
+  { decimal: number; spectral: SpectralType }
+>
 
 interface System {
   id: string
@@ -24,7 +28,7 @@ let selectedSystem = 'Regina'
 const supabase = useSupabaseClient()
 const systemResponse = await supabase.from('systems').select('name, id')
 const systems: SystemId[] = systemResponse.data!
-const starColors = new Map<StarColor, string>([
+const starColors = new Map<StarType, string>([
   ['O', 'white'],
   ['B', 'blue'],
   ['A', 'blue'],
@@ -50,12 +54,30 @@ const updateSystem = async (): Promise<void> => {
 
   const starsResponse = await supabase
     .from('stars')
-    .select('spectral, color, decimals')
+    .select('type, decimal, spectral')
     .eq('system', selectionId)
 
   if (response.error || starsResponse.error) return
 
-  const stars = starsResponse.data! as Star[]
+  const stars: Star[] = starsResponse.data!.flatMap<
+    Star,
+    {
+      type: StarType
+      decimal?: number
+      spectral?: SpectralType
+    }
+  >(
+    ({ type, decimal, spectral }): Star =>
+      decimal && spectral
+        ? {
+            less: { type },
+            more: {
+              decimal,
+              spectral,
+            },
+          }
+        : { less: { type } }
+  )
 
   const model: System = {
     ...response.data!,
@@ -100,7 +122,7 @@ updateSystem()
               cy="0"
               r="16"
               stroke="none"
-              :fill="starColors.get(star.color)"
+              :fill="starColors.get(star.less.type)"
             />
             <!-- star -->
           </template>
