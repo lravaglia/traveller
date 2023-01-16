@@ -129,29 +129,40 @@ updateSystem()
           class="z-20"
         >
           <template v-for="star in systemModel.stars" :key="star">
-            <circle
-              cx="0"
-              :cy="8 * orbitNumber++"
-              r="4"
-              stroke="none"
-              :fill="starColors[star.less.type]"
-            />
-          </template>
-          <template v-for="world in systemModel.worlds" :key="world">
             <template v-if="orbitNumber % 2 == 0">
               <circle
                 cx="0"
                 :cy="8 * orbitNumber++"
                 r="2"
                 stroke="none"
+                :fill="starColors[star.less.type]"
+              />
+            </template>
+            <template v-else>
+              <circle
+                cy="0"
+                :cx="8 * orbitNumber++"
+                r="2"
+                stroke="none"
+                :fill="starColors[star.less.type]"
+              />
+            </template>
+          </template>
+          <template v-for="world in systemModel.worlds" :key="world">
+            <template v-if="orbitNumber % 2 == 0">
+              <circle
+                cx="0"
+                :cy="8 * orbitNumber++"
+                r="1"
+                stroke="none"
                 fill="green"
               />
             </template>
             <template v-else>
               <circle
-                cx="0"
-                :cy="8 * orbitNumber++"
-                r="2"
+                cy="0"
+                :cx="8 * orbitNumber++"
+                r="1"
                 stroke="none"
                 fill="green"
               />
