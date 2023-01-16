@@ -57,7 +57,17 @@ const updateSystem = async (): Promise<void> => {
     .select('type, decimal, spectral')
     .eq('system', selectionId)
 
-  if (response.error || starsResponse.error) return
+  if (response.error) {
+    console.error('systemResponse: ', response.error)
+  }
+
+  if (starsResponse.error) {
+    console.error('starsResponse: ', starsResponse.error)
+  }
+
+  if (response.error || starsResponse.error) {
+    return
+  }
 
   const stars: Star[] = starsResponse.data!.flatMap<
     Star,
