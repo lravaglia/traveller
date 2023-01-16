@@ -95,7 +95,7 @@ updateSystem()
     <header>
       <h2>System Visualizer</h2>
     </header>
-    <form class="flex flex-col align-baseline" @submit="updateSystem">
+    <form class="flex flex-col align-baseline">
       <label for="system">System</label>
       <select id="system" v-model="selectedSystem">
         <option
@@ -106,7 +106,7 @@ updateSystem()
           {{ system.name }}
         </option>
       </select>
-      <button>Update</button>
+      <button type="button" @click="updateSystem">Update</button>
     </form>
     <ClientOnly>
       <article class="flex content-center align-center">
