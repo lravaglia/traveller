@@ -37,12 +37,12 @@ const starColors: Record<StarType, string> = {
   K: 'orange',
   M: 'red',
 }
-const systemModel: System = {
+const systemModel = reactive({
   id: '',
   name: '',
   stars: [],
   worlds: 0,
-}
+})
 
 const updateSystem = async (): Promise<void> => {
   const selectionId = systems.filter((s) => s.name === selectedSystem)[0].id
