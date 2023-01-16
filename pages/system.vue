@@ -91,24 +91,24 @@ updateSystem()
 </script>
 
 <template>
-  <ClientOnly>
-    <main>
-      <header>
-        <h2>System Visualizer</h2>
-      </header>
-      <form class="flex flex-col align-baseline" @submit="updateSystem">
-        <label for="system">System</label>
-        <select id="system" v-model="selectedSystem">
-          <option
-            v-for="system in systems"
-            :key="system.name"
-            :value="system.name"
-          >
-            {{ system.name }}
-          </option>
-        </select>
-        <button>Update</button>
-      </form>
+  <main>
+    <header>
+      <h2>System Visualizer</h2>
+    </header>
+    <form class="flex flex-col align-baseline" @submit="updateSystem">
+      <label for="system">System</label>
+      <select id="system" v-model="selectedSystem">
+        <option
+          v-for="system in systems"
+          :key="system.name"
+          :value="system.name"
+        >
+          {{ system.name }}
+        </option>
+      </select>
+      <button>Update</button>
+    </form>
+    <ClientOnly>
       <article class="flex content-center align-center">
         <h3>{{ systemModel.name }}</h3>
         <svg
@@ -117,6 +117,7 @@ updateSystem()
           xmlns="http://www.w3.org/2000/svg"
         >
           <template v-for="star in systemModel.stars" :key="star">
+            <!-- star -->
             <circle
               cx="0"
               cy="0"
@@ -124,18 +125,17 @@ updateSystem()
               stroke="none"
               :fill="starColors.get(star.less.type)"
             />
-            <!-- star -->
           </template>
           <template v-for="world in systemModel.worlds" :key="world">
-            <circle cx="0" cy="0" r="8" stroke="none" fill="blue" />
             <!-- planet -->
-            <circle cx="0" cy="0" r="4" stroke="black" fill="none" />
+            <circle cx="0" cy="0" r="8" stroke="none" fill="blue" />
             <!-- orbit -->
+            <circle cx="0" cy="0" r="4" stroke="black" fill="none" />
           </template>
         </svg>
       </article>
-    </main>
-  </ClientOnly>
+    </ClientOnly>
+  </main>
 </template>
 
 <style scoped>
