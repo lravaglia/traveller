@@ -1,40 +1,65 @@
 <script lang="ts" setup>
+type StarColor = 'O' | 'B' | 'A' | 'F' | 'G' | 'K' | 'M'
+type SpectralType = 'Ia' | 'Ib' | 'II' | 'III' | 'IV' | 'V' | 'VI' | 'D'
+
+interface Star {
+  spectral: SpectralType
+  color: StarColor
+  decimals: number
+}
+
 interface System {
-  name: string
   id: string
-}
-
-interface Model {
   name: string
-  stars: string[]
-  worlds: string[]
+  stars: Star[]
+  worlds: number
 }
 
-const supabase = useSupabaseClient()
-const response = await supabase.from('systems').select('name, id')
-const systems: System[] = response.data!
+interface SystemId {
+  id: string
+  name: string
+}
 
 let selectedSystem = 'Regina'
-const systemModel: Model = {
-  name: selectedSystem,
+const supabase = useSupabaseClient()
+const systemResponse = await supabase.from('systems').select('name, id')
+const systems: SystemId[] = systemResponse.data!
+const starColors = new Map<StarColor, string>([
+  ['O', 'white'],
+  ['B', 'blue'],
+  ['A', 'blue'],
+  ['F', 'yellow'],
+  ['G', 'yellow'],
+  ['K', 'orange'],
+  ['M', 'red'],
+])
+const systemModel: System = {
+  id: '',
+  name: '',
   stars: [],
-  worlds: [],
+  worlds: 0,
 }
 
-const updateSystem = async () => {
+const updateSystem = async (): Promise<void> => {
+  const selectionId = systems.filter((s) => s.name === selectedSystem)[0].id
   const response = await supabase
     .from('systems')
-    .select('name, id')
-    .eq('name', selectedSystem)
+    .select('id, name, worlds')
+    .eq('id', selectionId)
     .single()
 
-  if (response.error) return
+  const starsResponse = await supabase
+    .from('stars')
+    .select('spectral, color, decimals')
+    .eq('system', selectionId)
 
-  const data = response.data!
-  const model: Model = {
-    name: data.name,
-    stars: [],
-    worlds: [],
+  if (response.error || starsResponse.error) return
+
+  const stars = starsResponse.data! as Star[]
+
+  const model: System = {
+    ...response.data!,
+    stars,
   }
 
   selectedSystem = model.name
@@ -69,7 +94,22 @@ updateSystem()
           viewBox="-128 -128 256 256"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <circle cx="0" cy="0" r="16" stroke="none" fill="yellow" />
+          <template v-for="star in systemModel.stars" :key="star">
+            <circle
+              cx="0"
+              cy="0"
+              r="16"
+              stroke="none"
+              :fill="starColors.get(star.color)"
+            />
+            <!-- star -->
+          </template>
+          <template v-for="world in systemModel.worlds" :key="world">
+            <circle cx="0" cy="0" r="8" stroke="none" fill="blue" />
+            <!-- planet -->
+            <circle cx="0" cy="0" r="4" stroke="black" fill="none" />
+            <!-- orbit -->
+          </template>
         </svg>
       </article>
     </main>
@@ -81,6 +121,7 @@ svg {
   display: block;
   margin: auto;
 }
+
 button,
 select {
   @apply border-red-600 border-2 p-2 bg-black rounded;
