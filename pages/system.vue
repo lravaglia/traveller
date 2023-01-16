@@ -28,15 +28,15 @@ let selectedSystem = 'Regina'
 const supabase = useSupabaseClient()
 const systemResponse = await supabase.from('systems').select('name, id')
 const systems: SystemId[] = systemResponse.data!
-const starColors = new Map<StarType, string>([
-  ['O', 'white'],
-  ['B', 'blue'],
-  ['A', 'blue'],
-  ['F', 'yellow'],
-  ['G', 'yellow'],
-  ['K', 'orange'],
-  ['M', 'red'],
-])
+const starColors: Record<StarType, string> = {
+  O: 'white',
+  B: 'blue',
+  A: 'blue',
+  F: 'yellow',
+  G: 'yellow',
+  K: 'orange',
+  M: 'red',
+}
 const systemModel: System = {
   id: '',
   name: '',
