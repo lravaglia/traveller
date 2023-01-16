@@ -33,6 +33,11 @@ export default defineNuxtConfig({
     'nuxt-windicss',
     '@nuxtjs/supabase',
   ],
+  
+  supabase: {
+    url: process.env.SUPABASE_URL,
+    key: process.env.SUPABASE_KEY,
+  },
 
   // vite plugins
   vite: {
