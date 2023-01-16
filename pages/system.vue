@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-type StarType = 'O' | 'B' | 'A' | 'F' | 'G' | 'K' | 'M'
+type StarType = 'O' | 'B' | 'A' | 'F' | 'G' | 'K' | 'M' | 'BD'
 type SpectralType = 'Ia' | 'Ib' | 'II' | 'III' | 'IV' | 'V' | 'VI' | 'D'
 
 type Detail<A extends {}, B extends {}> = {
@@ -36,13 +36,15 @@ const starColors: Record<StarType, string> = {
   G: 'yellow',
   K: 'orange',
   M: 'red',
+  BD: 'brown',
 }
-const systemModel = reactive({
+const systemModel: System = reactive({
   id: '',
   name: '',
   stars: [],
   worlds: 0,
 })
+let orbitNumber = 0
 
 const updateSystem = async (): Promise<void> => {
   const selectionId = systems.filter((s) => s.name === selectedSystem)[0].id
@@ -94,6 +96,7 @@ const updateSystem = async (): Promise<void> => {
     stars,
   }
 
+  orbitNumber = 0
   selectedSystem = model.name
   Object.assign(systemModel, model)
 }
@@ -119,39 +122,67 @@ updateSystem()
       <button type="button" @click="updateSystem">Update</button>
     </form>
     <ClientOnly>
-      <article class="flex content-center align-center">
-        <h3>{{ systemModel.name }}</h3>
+      <div class="w-96 h-96">
         <svg
-          style="display: block; margin: auto"
           viewBox="-128 -128 256 256"
           xmlns="http://www.w3.org/2000/svg"
+          class="z-20"
         >
           <template v-for="star in systemModel.stars" :key="star">
-            <!-- star -->
             <circle
               cx="0"
-              cy="0"
-              r="16"
+              :cy="8 * orbitNumber++"
+              r="4"
               stroke="none"
-              :fill="starColors.get(star.less.type)"
+              :fill="starColors[star.less.type]"
             />
           </template>
           <template v-for="world in systemModel.worlds" :key="world">
-            <!-- planet -->
-            <circle cx="0" cy="0" r="8" stroke="none" fill="blue" />
-            <!-- orbit -->
-            <circle cx="0" cy="0" r="4" stroke="black" fill="none" />
+            <template v-if="orbitNumber % 2 == 0">
+              <circle
+                cx="0"
+                :cy="8 * orbitNumber++"
+                r="2"
+                stroke="none"
+                fill="green"
+              />
+            </template>
+            <template v-else>
+              <circle
+                cx="0"
+                :cy="8 * orbitNumber++"
+                r="2"
+                stroke="none"
+                fill="green"
+              />
+            </template>
           </template>
         </svg>
-      </article>
+        <svg
+          viewBox="-128 -128 256 256"
+          xmlns="http://www.w3.org/2000/svg"
+          class="z-10"
+        >
+          <template v-for="o in orbitNumber" :key="o">
+            <circle
+              cx="0"
+              cy="0"
+              :r="8 * (o - 1)"
+              stroke="white"
+              fill="none"
+              stroke-width="0.25"
+            />
+          </template>
+        </svg>
+      </div>
     </ClientOnly>
   </main>
 </template>
 
 <style scoped>
 svg {
-  display: block;
   margin: auto;
+  position: absolute;
 }
 
 button,
