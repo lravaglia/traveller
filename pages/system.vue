@@ -125,44 +125,40 @@ updateSystem()
           class="z-20"
         >
           <template v-for="star in systemModel.stars" :key="star">
-            <template v-if="orbitNumber % 2 == 0">
-              <circle
-                cx="0"
-                :cy="8 * orbitNumber++"
-                r="2"
-                stroke="none"
-                :fill="starColors[star.type]"
-              />
-            </template>
-            <template v-else>
-              <circle
-                cy="0"
-                :cx="8 * orbitNumber++"
-                r="2"
-                stroke="none"
-                :fill="starColors[star.type]"
-              />
-            </template>
+            <circle
+              v-if="orbitNumber % 2 == 0"
+              cx="0"
+              :cy="8 * orbitNumber++"
+              r="2"
+              stroke="none"
+              :fill="starColors[star.type]"
+            />
+            <circle
+              v-else
+              cy="0"
+              :cx="8 * orbitNumber++"
+              r="2"
+              stroke="none"
+              :fill="starColors[star.type]"
+            />
           </template>
           <template v-for="world in systemModel.worlds" :key="world">
-            <template v-if="orbitNumber % 2 == 0">
-              <circle
-                cx="0"
-                :cy="8 * orbitNumber++"
-                r="1"
-                stroke="none"
-                fill="green"
-              />
-            </template>
-            <template v-else>
-              <circle
-                cy="0"
-                :cx="8 * orbitNumber++"
-                r="1"
-                stroke="none"
-                fill="green"
-              />
-            </template>
+            <circle
+              v-if="orbitNumber % 2 == 0"
+              cx="0"
+              :cy="8 * orbitNumber++"
+              r="1"
+              stroke="none"
+              fill="green"
+            />
+            <circle
+              v-else
+              cy="0"
+              :cx="8 * orbitNumber++"
+              r="1"
+              stroke="none"
+              fill="green"
+            />
           </template>
         </svg>
         <svg
