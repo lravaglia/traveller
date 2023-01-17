@@ -1,33 +1,5 @@
 <script lang="ts" setup>
-type StarType = 'O' | 'B' | 'A' | 'F' | 'G' | 'K' | 'M' | 'BD'
-type SpectralType = 'Ia' | 'Ib' | 'II' | 'III' | 'IV' | 'V' | 'VI' | 'D'
-
-type Detail<L extends {}, M extends {}> = L | (L & M)
-type DetailPrime<L extends {}, M extends {}> = L & Partial<M>
-
-interface StarLess {
-  type: StarType
-}
-
-interface StarMore {
-  decimal: number
-  spectral: SpectralType
-}
-
-type Star = Detail<StarLess, StarMore>
-const newStar = ({
-  type,
-  decimal,
-  spectral,
-}: DetailPrime<StarLess, StarMore>) =>
-  decimal && spectral
-    ? {
-        type,
-        decimal,
-        spectral,
-      }
-    : { type }
-
+import { Star, newStar } from '~/src/star'
 interface SystemId {
   id: string
   name: string
@@ -42,16 +14,6 @@ let selectedSystem = 'Regina'
 const supabase = useSupabaseClient()
 const systemResponse = await supabase.from('systems').select('name, id')
 const systems: SystemId[] = systemResponse.data!
-const starColors: Record<StarType, string> = {
-  O: 'white',
-  B: 'blue',
-  A: 'blue',
-  F: 'yellow',
-  G: 'yellow',
-  K: 'orange',
-  M: 'red',
-  BD: 'brown',
-}
 const systemModel: System = reactive({
   id: '',
   name: '',
@@ -125,22 +87,13 @@ updateSystem()
           class="z-20"
         >
           <template v-for="star in systemModel.stars" :key="star">
-            <circle
+            <Star
               v-if="orbitNumber % 2 == 0"
               cx="0"
               :cy="8 * orbitNumber++"
-              r="2"
-              stroke="none"
-              :fill="starColors[star.type]"
+              :type="star.type"
             />
-            <circle
-              v-else
-              cy="0"
-              :cx="8 * orbitNumber++"
-              r="2"
-              stroke="none"
-              :fill="starColors[star.type]"
-            />
+            <Star v-else cy="0" :cx="8 * orbitNumber++" :fill="star.type" />
           </template>
           <template v-for="world in systemModel.worlds" :key="world">
             <circle
