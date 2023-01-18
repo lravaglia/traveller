@@ -3,7 +3,10 @@ import { System } from '~/src/system'
 const props = defineProps<{
   systemModel: System
 }>()
-const orbitNumber = 0
+
+let orbitNumber = 0
+
+const orbit = () => 8 * orbitNumber++
 </script>
 
 <template>
@@ -17,14 +20,14 @@ const orbitNumber = 0
         <Star
           v-if="orbitNumber % 2 == 0"
           :cx="0"
-          :cy="8 * orbitNumber++"
+          :cy="orbit()"
           :type="star.type"
         />
         <Star v-else :cy="0" :cx="8 * orbitNumber++" :type="star.type" />
       </template>
       <template v-for="world in props.systemModel.worlds" :key="world">
-        <World v-if="orbitNumber % 2 == 0" :cx="0" :cy="8 * orbitNumber++" />
-        <World v-else :cy="0" :cx="8 * orbitNumber++" />
+        <World v-if="orbitNumber % 2 == 0" :cx="0" :cy="orbit()" />
+        <World v-else :cy="0" :cx="orbit()" />
       </template>
     </svg>
     <svg
