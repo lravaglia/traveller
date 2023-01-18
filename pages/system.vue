@@ -1,14 +1,6 @@
 <script lang="ts" setup>
 import { Star, newStar } from '~/src/star'
-interface SystemId {
-  id: string
-  name: string
-}
-
-interface System extends SystemId {
-  stars: Star[]
-  worlds: number
-}
+import { System, SystemId } from '~/src/system'
 
 let selectedSystem = 'Regina'
 const supabase = useSupabaseClient()
@@ -20,7 +12,6 @@ const systemModel: System = reactive({
   stars: [],
   worlds: 0,
 })
-let orbitNumber = 0
 
 const updateSystem = async (): Promise<void> => {
   const selectionId = systems.filter((s) => s.name === selectedSystem)[0].id
@@ -54,7 +45,6 @@ const updateSystem = async (): Promise<void> => {
     stars,
   }
 
-  orbitNumber = 0
   selectedSystem = model.name
   Object.assign(systemModel, model)
 }
@@ -80,43 +70,7 @@ updateSystem()
       <button type="button" @click="updateSystem">Update</button>
     </form>
     <ClientOnly>
-      <div class="w-96 h-96">
-        <svg
-          viewBox="-128 -128 256 256"
-          xmlns="http://www.w3.org/2000/svg"
-          class="z-20"
-        >
-          <template v-for="star in systemModel.stars" :key="star">
-            <Star
-              v-if="orbitNumber % 2 == 0"
-              cx="0"
-              :cy="8 * orbitNumber++"
-              :type="star.type"
-            />
-            <Star v-else cy="0" :cx="8 * orbitNumber++" :fill="star.type" />
-          </template>
-          <template v-for="world in systemModel.worlds" :key="world">
-            <World v-if="orbitNumber % 2 == 0" cx="0" :cy="8 * orbitNumber++" />
-            <World v-else cy="0" :cx="8 * orbitNumber++" />
-          </template>
-        </svg>
-        <svg
-          viewBox="-128 -128 256 256"
-          xmlns="http://www.w3.org/2000/svg"
-          class="z-10"
-        >
-          <template v-for="o in orbitNumber" :key="o">
-            <circle
-              cx="0"
-              cy="0"
-              :r="8 * (o - 1)"
-              stroke="white"
-              fill="none"
-              stroke-width="0.25"
-            />
-          </template>
-        </svg>
-      </div>
+      <System :system-model="systemModel" />
     </ClientOnly>
   </main>
 </template>
