@@ -6,6 +6,11 @@ const props = defineProps<{
 
 let orbitNumber = 0
 
+onBeforeUpdate(() => {
+  // prevents orbits from escaping the view port after not being reset.
+  orbitNumber = 0
+})
+
 const orbit = () => 8 * orbitNumber++
 </script>
 
@@ -49,4 +54,9 @@ const orbit = () => 8 * orbitNumber++
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+svg {
+  margin: auto;
+  position: absolute;
+}
+</style>

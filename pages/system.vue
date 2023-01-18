@@ -76,11 +76,6 @@ updateSystem()
 </template>
 
 <style scoped>
-svg {
-  margin: auto;
-  position: absolute;
-}
-
 button,
 select {
   @apply border-red-600 border-2 p-2 bg-black rounded;
