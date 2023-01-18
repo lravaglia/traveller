@@ -12,4 +12,4 @@ ENV SUPABASE_URL ""
 ENV SUPABASE_KEY ""
 
 ENTRYPOINT [ "sh" ]
-CMD [ "/app/entrypoint.sh ]
+CMD [ "/app/entrypoint.sh" ]
