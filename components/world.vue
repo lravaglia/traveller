@@ -6,7 +6,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <circle :cx="cx" :cy="cy" r="1" stroke="none" fill="green" />
+  <OrbitalBody :cx="cx" :cy="cy" :r="1" stroke="none" fill="green" />
 </template>
 
 <style scoped></style>

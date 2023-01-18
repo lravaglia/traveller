@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Star, newStar } from '~/src/star'
-import { System, SystemId } from '~/src/system'
+import type { System, SystemId } from '~/src/system'
 
 let selectedSystem = 'Regina'
 const supabase = useSupabaseClient()

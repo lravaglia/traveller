@@ -16,15 +16,15 @@ const orbitNumber = 0
       <template v-for="star in props.systemModel.stars" :key="star">
         <Star
           v-if="orbitNumber % 2 == 0"
-          cx="0"
+          :cx="0"
           :cy="8 * orbitNumber++"
           :type="star.type"
         />
-        <Star v-else cy="0" :cx="8 * orbitNumber++" :fill="star.type" />
+        <Star v-else :cy="0" :cx="8 * orbitNumber++" :type="star.type" />
       </template>
       <template v-for="world in props.systemModel.worlds" :key="world">
-        <World v-if="orbitNumber % 2 == 0" cx="0" :cy="8 * orbitNumber++" />
-        <World v-else cy="0" :cx="8 * orbitNumber++" />
+        <World v-if="orbitNumber % 2 == 0" :cx="0" :cy="8 * orbitNumber++" />
+        <World v-else :cy="0" :cx="8 * orbitNumber++" />
       </template>
     </svg>
     <svg

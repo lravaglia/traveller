@@ -16,7 +16,7 @@ const starColors: Record<StarType, string> = {
 
 <template>
   <OrbitalBody
-    r="2"
+    :r="2"
     :fill="starColors[props.type]"
     :cx="props.cx"
     :cy="props.cy"
