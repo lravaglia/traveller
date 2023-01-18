@@ -96,22 +96,8 @@ updateSystem()
             <Star v-else cy="0" :cx="8 * orbitNumber++" :fill="star.type" />
           </template>
           <template v-for="world in systemModel.worlds" :key="world">
-            <circle
-              v-if="orbitNumber % 2 == 0"
-              cx="0"
-              :cy="8 * orbitNumber++"
-              r="1"
-              stroke="none"
-              fill="green"
-            />
-            <circle
-              v-else
-              cy="0"
-              :cx="8 * orbitNumber++"
-              r="1"
-              stroke="none"
-              fill="green"
-            />
+            <World v-if="orbitNumber % 2 == 0" cx="0" :cy="8 * orbitNumber++" />
+            <World v-else cy="0" :cx="8 * orbitNumber++" />
           </template>
         </svg>
         <svg
