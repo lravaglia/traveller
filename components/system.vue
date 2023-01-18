@@ -1,0 +1,49 @@
+<script lang="ts" setup>
+import { System } from '~/src/system'
+const props = defineProps<{
+  systemModel: System
+}>()
+const orbitNumber = 0
+</script>
+
+<template>
+  <div class="w-96 h-96">
+    <svg
+      viewBox="-128 -128 256 256"
+      xmlns="http://www.w3.org/2000/svg"
+      class="z-20"
+    >
+      <template v-for="star in props.systemModel.stars" :key="star">
+        <Star
+          v-if="orbitNumber % 2 == 0"
+          cx="0"
+          :cy="8 * orbitNumber++"
+          :type="star.type"
+        />
+        <Star v-else cy="0" :cx="8 * orbitNumber++" :fill="star.type" />
+      </template>
+      <template v-for="world in props.systemModel.worlds" :key="world">
+        <World v-if="orbitNumber % 2 == 0" cx="0" :cy="8 * orbitNumber++" />
+        <World v-else cy="0" :cx="8 * orbitNumber++" />
+      </template>
+    </svg>
+    <svg
+      viewBox="-128 -128 256 256"
+      xmlns="http://www.w3.org/2000/svg"
+      class="z-10"
+    >
+      <template v-for="o in orbitNumber" :key="o">
+        <circle
+          cx="0"
+          cy="0"
+          :r="8 * (o - 1)"
+          stroke="white"
+          fill="none"
+          stroke-width="0.25"
+        />
+      </template>
+    </svg>
+  </div>
+</template>
+
+<style scoped></style>

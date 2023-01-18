@@ -1,50 +1,17 @@
 <script lang="ts" setup>
-type StarType = 'O' | 'B' | 'A' | 'F' | 'G' | 'K' | 'M' | 'BD'
-type SpectralType = 'Ia' | 'Ib' | 'II' | 'III' | 'IV' | 'V' | 'VI' | 'D'
-
-type Detail<A extends {}, B extends {}> = {
-  less: A
-  more?: B
-}
-
-type Star = Detail<
-  { type: StarType },
-  { decimal: number; spectral: SpectralType }
->
-
-interface System {
-  id: string
-  name: string
-  stars: Star[]
-  worlds: number
-}
-
-interface SystemId {
-  id: string
-  name: string
-}
+import { Star, newStar } from '~/src/star'
+import { System, SystemId } from '~/src/system'
 
 let selectedSystem = 'Regina'
 const supabase = useSupabaseClient()
 const systemResponse = await supabase.from('systems').select('name, id')
 const systems: SystemId[] = systemResponse.data!
-const starColors: Record<StarType, string> = {
-  O: 'white',
-  B: 'blue',
-  A: 'blue',
-  F: 'yellow',
-  G: 'yellow',
-  K: 'orange',
-  M: 'red',
-  BD: 'brown',
-}
 const systemModel: System = reactive({
   id: '',
   name: '',
   stars: [],
   worlds: 0,
 })
-let orbitNumber = 0
 
 const updateSystem = async (): Promise<void> => {
   const selectionId = systems.filter((s) => s.name === selectedSystem)[0].id
@@ -71,32 +38,13 @@ const updateSystem = async (): Promise<void> => {
     return
   }
 
-  const stars: Star[] = starsResponse.data!.flatMap<
-    Star,
-    {
-      type: StarType
-      decimal?: number
-      spectral?: SpectralType
-    }
-  >(
-    ({ type, decimal, spectral }): Star =>
-      decimal && spectral
-        ? {
-            less: { type },
-            more: {
-              decimal,
-              spectral,
-            },
-          }
-        : { less: { type } }
-  )
+  const stars: Star[] = starsResponse.data!.flatMap(newStar)
 
   const model: System = {
     ...response.data!,
     stars,
   }
 
-  orbitNumber = 0
   selectedSystem = model.name
   Object.assign(systemModel, model)
 }
@@ -122,70 +70,7 @@ updateSystem()
       <button type="button" @click="updateSystem">Update</button>
     </form>
     <ClientOnly>
-      <div class="w-96 h-96">
-        <svg
-          viewBox="-128 -128 256 256"
-          xmlns="http://www.w3.org/2000/svg"
-          class="z-20"
-        >
-          <template v-for="star in systemModel.stars" :key="star">
-            <template v-if="orbitNumber % 2 == 0">
-              <circle
-                cx="0"
-                :cy="8 * orbitNumber++"
-                r="2"
-                stroke="none"
-                :fill="starColors[star.less.type]"
-              />
-            </template>
-            <template v-else>
-              <circle
-                cy="0"
-                :cx="8 * orbitNumber++"
-                r="2"
-                stroke="none"
-                :fill="starColors[star.less.type]"
-              />
-            </template>
-          </template>
-          <template v-for="world in systemModel.worlds" :key="world">
-            <template v-if="orbitNumber % 2 == 0">
-              <circle
-                cx="0"
-                :cy="8 * orbitNumber++"
-                r="1"
-                stroke="none"
-                fill="green"
-              />
-            </template>
-            <template v-else>
-              <circle
-                cy="0"
-                :cx="8 * orbitNumber++"
-                r="1"
-                stroke="none"
-                fill="green"
-              />
-            </template>
-          </template>
-        </svg>
-        <svg
-          viewBox="-128 -128 256 256"
-          xmlns="http://www.w3.org/2000/svg"
-          class="z-10"
-        >
-          <template v-for="o in orbitNumber" :key="o">
-            <circle
-              cx="0"
-              cy="0"
-              :r="8 * (o - 1)"
-              stroke="white"
-              fill="none"
-              stroke-width="0.25"
-            />
-          </template>
-        </svg>
-      </div>
+      <System :system-model="systemModel" />
     </ClientOnly>
   </main>
 </template>
