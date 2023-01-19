@@ -15,11 +15,11 @@ const orbit = () => 8 * orbitNumber++
 </script>
 
 <template>
-  <div class="w-96 h-96">
+  <div>
     <svg
       viewBox="-128 -128 256 256"
       xmlns="http://www.w3.org/2000/svg"
-      class="z-20"
+      class="bodies"
     >
       <template v-for="star in props.systemModel.stars" :key="star">
         <Star
@@ -30,7 +30,7 @@ const orbit = () => 8 * orbitNumber++
         />
         <Star v-else :cy="0" :cx="8 * orbitNumber++" :type="star.type" />
       </template>
-      <template v-for="world in props.systemModel.worlds" :key="world">
+      <template v-for="_world in props.systemModel.worlds" :key="_world">
         <World v-if="orbitNumber % 2 == 0" :cx="0" :cy="orbit()" />
         <World v-else :cy="0" :cx="orbit()" />
       </template>
@@ -38,7 +38,7 @@ const orbit = () => 8 * orbitNumber++
     <svg
       viewBox="-128 -128 256 256"
       xmlns="http://www.w3.org/2000/svg"
-      class="z-10"
+      class="orbits"
     >
       <template v-for="o in orbitNumber" :key="o">
         <circle
@@ -55,8 +55,21 @@ const orbit = () => 8 * orbitNumber++
 </template>
 
 <style scoped>
+div {
+  width: 24rem;
+  height: 24rem;
+}
+
 svg {
   margin: auto;
   position: absolute;
+}
+
+.orbits {
+  z-index: 10;
+}
+
+.bodies {
+  z-index: 20;
 }
 </style>

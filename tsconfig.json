@@ -5,10 +5,8 @@
     "strict": true,
     "skipLibCheck": true,
     "types": [
-      "nuxt-windicss",
       "@vueuse/nuxt",
       "@pinia/nuxt",
-      "unplugin-icons/types/vue"
     ]
   }
 }

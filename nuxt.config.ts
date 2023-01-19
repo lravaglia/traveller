@@ -1,6 +1,3 @@
-import UnpluginComponentsVite from 'unplugin-vue-components/vite'
-import IconsResolver from 'unplugin-icons/resolver'
-
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default {
   // server side rendering mode
@@ -12,43 +9,8 @@ export default {
     typeCheck: true,
   },
 
-  // css
-  css: [
-    'virtual:windi-base.css',
-    'virtual:windi-components.css',
-    'virtual:windi-utilities.css',
-  ],
-
-  // build
-  build: {
-    transpile: ['@headlessui/vue'],
-  },
+  css: ['the-new-css-reset/css/reset.css', '~/assets/defaults.scss'],
 
   // modules
-  modules: [
-    'unplugin-icons/nuxt',
-    '@pinia/nuxt',
-    '@vueuse/nuxt',
-    'nuxt-windicss',
-    '@nuxtjs/supabase',
-  ],
-
-  supabase: {
-    url: process.env.SUPABASE_URL,
-    key: process.env.SUPABASE_KEY,
-  },
-
-  // vite plugins
-  vite: {
-    plugins: [
-      UnpluginComponentsVite({
-        dts: true,
-        resolvers: [
-          IconsResolver({
-            prefix: 'Icon',
-          }),
-        ],
-      }),
-    ],
-  },
+  modules: ['@pinia/nuxt', '@vueuse/nuxt', '@nuxtjs/supabase'],
 }
