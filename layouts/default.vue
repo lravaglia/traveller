@@ -1,30 +1,48 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { useBodyAttrs } from '@vueuse/head'
+
+useBodyAttrs({
+  style: () => 'background: black',
+})
+</script>
 
 <template>
-  <Body class="bg-black">
-    <header class="border-red-600 border-b-2">
-      <section id="inner-header">
-        <Hero />
+  <header>
+    <nav>
+      <div>
+        <HeadItem link="/" name="Traveller Tools" />
+      </div>
+      <div>
         <HeadItem link="/about" name="About" />
+      </div>
+      <div>
         <HeadItem link="/system" name="System" />
-      </section>
-    </header>
-    <div id="layout-center">
-      <slot />
-    </div>
-  </Body>
+      </div>
+    </nav>
+  </header>
+  <div id="layout-center">
+    <slot />
+  </div>
 </template>
 
-<style scoped>
-section {
-  @apply flex flex-row content-center space-x-16;
+<style scoped lang="scss">
+header {
+  border: 0px solid red;
+  border-bottom-width: 2px;
+}
+
+div {
+  margin-right: 2rem;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  margin: 1rem 2rem;
 }
 
 #layout-center {
   margin: 0 2rem;
-}
-
-#inner-header {
-  margin: 1rem 2rem;
 }
 </style>

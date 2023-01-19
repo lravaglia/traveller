@@ -26,17 +26,7 @@ const updateSystem = async (): Promise<void> => {
     .select('type, decimal, spectral')
     .eq('system', selectionId)
 
-  if (response.error) {
-    console.error('systemResponse: ', response.error)
-  }
-
-  if (starsResponse.error) {
-    console.error('starsResponse: ', starsResponse.error)
-  }
-
-  if (response.error || starsResponse.error) {
-    return
-  }
+  if (response.error || starsResponse.error) return
 
   const stars: Star[] = starsResponse.data!.flatMap(newStar)
 
@@ -56,7 +46,7 @@ updateSystem()
     <header>
       <h2>System Visualizer</h2>
     </header>
-    <form class="flex flex-col align-baseline">
+    <form>
       <label for="system">System</label>
       <select id="system" v-model="selectedSystem">
         <option
@@ -76,16 +66,27 @@ updateSystem()
 </template>
 
 <style scoped>
+form {
+  display: flex;
+  flex-direction: column;
+}
+
 button,
 select {
-  @apply border-red-600 border-2 p-2 bg-black rounded;
+  border: solid red;
+  border-radius: 0.25rem;
+  margin: 0.25rem;
+  padding: 0.25rem;
+  text-align: center;
 }
 
 h2 {
-  @apply text-red-600 text-2xl;
+  color: red;
+  font-size: 1.5rem;
 }
 
 h3 {
-  @apply text-red-600 text-xl;
+  color: red;
+  font-size: 2rem;
 }
 </style>

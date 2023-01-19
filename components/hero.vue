@@ -10,10 +10,13 @@
 
 <style scoped>
 article {
-  @apply flex content-center justify-center;
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }
 
 h1 {
-  @apply text-red-600 text-3xl;
+  color: read;
+  font-size: 2rem;
 }
 </style>

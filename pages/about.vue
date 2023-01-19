@@ -4,17 +4,24 @@
   <main>
     <article>
       <header>
-        <h2 class="text-red-600 text-2xl">Affero GPL</h2>
+        <h2>Affero GPL</h2>
       </header>
       <p>
         This project is licensed under the AGPL-3.0-only, the source code for
         this project is available on
-        <a class="text-red-500" href="https://github.com/lravaglia/traveller"
-          >GitHub</a
-        >.
+        <a href="https://github.com/lravaglia/traveller">GitHub</a>.
       </p>
     </article>
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+a {
+  color: red;
+}
+
+h2 {
+  color: red;
+  font-size: 1.5rem;
+}
+</style>
